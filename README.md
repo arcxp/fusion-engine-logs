@@ -1,4 +1,4 @@
-# Arc XP Log Forwarding to AWS CloudWatch
+# Arc XP Log Forwarding to AWS CloudWatch & s3
 
 ## Overview
 
