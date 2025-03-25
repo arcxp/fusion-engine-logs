@@ -165,6 +165,10 @@ During the guided deployment, you will be prompted to enter parameters such as t
 ### Step 4: Verify the Deployment
 After deployment, verify that the Lambda function is created and configured correctly in the AWS Management Console.
 
+<img width="1395" alt="image" src="https://github.com/user-attachments/assets/5fdbf448-f51d-4c73-a2c7-31e749dafedf" />
+
+
+
 ## Troubleshooting
 ### Common Issues and Fixes
 - **Logs not appearing in CloudWatch**: Verify IAM role permissions, Kinesis stream configuration, and subscription filters.
