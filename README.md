@@ -168,15 +168,7 @@ After deployment, verify that the Lambda function is created and configured corr
 <img width="1395" alt="image" src="https://github.com/user-attachments/assets/5fdbf448-f51d-4c73-a2c7-31e749dafedf" />
 
 
-
 ## Troubleshooting
 ### Common Issues and Fixes
 - **Logs not appearing in CloudWatch**: Verify IAM role permissions, Kinesis stream configuration, and subscription filters.
 - **Access Denied Errors**: Check the CloudWatch destination policy and IAM role permissions.
-
-
-
-
-
-## Resources
-- [AWS CloudWatch Log Destination Documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CreateDestination.html)
