@@ -13,10 +13,8 @@ The guide includes detailed instructions on:
 - Configuring the **CloudWatch Logs destination**
 - Deploying resources using the **AWS CLI**
 
-It also provides **troubleshooting tips** and **best practices** to ensure a smooth and reliable log forwarding setup.
 
-Additionally, the solution includes an optional **AWS Lambda function** that enables streaming of log content to **CloudWatch Logs** and/or **Amazon S3** within the customer’s receiving account.
-
+Additionally, the solution includes an optional **AWS Lambda function** that enables streaming of logs content to **CloudWatch Logs** and/or **Amazon S3** within the customer’s receiving account.
 
 *Note:* The aws region for the destination account must match the Arc XP Platform deployment region 
 
@@ -135,10 +133,50 @@ aws logs put-destination-policy \
     --access-policy file://access-policy.json
 ```
 
+## Deploying the AWS Lambda Function with AWS SAM
+
+### Important: Replace Placeholders in `template.yaml`
+Before deploying the Lambda function, ensure that all placeholders in the `template.yaml` file are replaced with your specific AWS account details. The placeholders include:
+
+- `<aws-account-id>`: Replace with your AWS account ID.
+- `<region>`: Replace with the AWS region where you want to deploy the resources.
+
+Ensure these placeholders are correctly replaced to avoid deployment errors.
+
+### Step 1: Install AWS SAM CLI
+Ensure you have the AWS SAM CLI installed. You can follow the installation guide from the [AWS SAM CLI documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html).
+
+### Step 2: Build the Lambda Function
+Use the SAM CLI to build the Lambda function. This command will package your application and its dependencies.
+
+```bash
+sam build
+```
+
+### Step 3: Deploy the Lambda Function
+Deploy the function using the SAM CLI. This command will package and deploy your application to AWS, creating the necessary resources.
+
+```bash
+sam deploy --guided
+```
+
+During the guided deployment, you will be prompted to enter parameters such as the stack name, AWS region, and whether to save the configuration for future deployments.
+
+### Step 4: Verify the Deployment
+After deployment, verify that the Lambda function is created and configured correctly in the AWS Management Console.
+
+<img width="1395" alt="image" src="https://github.com/user-attachments/assets/5fdbf448-f51d-4c73-a2c7-31e749dafedf" />
+
+
+
 ## Troubleshooting
 ### Common Issues and Fixes
 - **Logs not appearing in CloudWatch**: Verify IAM role permissions, Kinesis stream configuration, and subscription filters.
 - **Access Denied Errors**: Check the CloudWatch destination policy and IAM role permissions.
+
+
+
+
 
 ## Resources
 - [AWS CloudWatch Log Destination Documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CreateDestination.html)
