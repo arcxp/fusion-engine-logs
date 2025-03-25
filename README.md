@@ -13,10 +13,8 @@ The guide includes detailed instructions on:
 - Configuring the **CloudWatch Logs destination**
 - Deploying resources using the **AWS CLI**
 
-It also provides **troubleshooting tips** and **best practices** to ensure a smooth and reliable log forwarding setup.
 
-Additionally, the solution includes an optional **AWS Lambda function** that enables streaming of log content to **CloudWatch Logs** and/or **Amazon S3** within the customer’s receiving account.
-
+Additionally, the solution includes an optional **AWS Lambda function** that enables streaming of logs content to **CloudWatch Logs** and/or **Amazon S3** within the customer’s receiving account.
 
 *Note:* The aws region for the destination account must match the Arc XP Platform deployment region 
 
@@ -139,6 +137,10 @@ aws logs put-destination-policy \
 ### Common Issues and Fixes
 - **Logs not appearing in CloudWatch**: Verify IAM role permissions, Kinesis stream configuration, and subscription filters.
 - **Access Denied Errors**: Check the CloudWatch destination policy and IAM role permissions.
+
+
+
+
 
 ## Resources
 - [AWS CloudWatch Log Destination Documentation](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CreateDestination.html)

@@ -1,0 +1,50 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Lambda function to forward logs from Kinesis to CloudWatch and S3.
+
+Resources:
+  LogForwarderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: ArcXPLogForwarder
+      Handler: log_forwarder.handler
+      Runtime: python3.11
+      CodeUri: .
+      MemorySize: 256
+      Timeout: 60
+      Environment:
+        Variables:
+          S3_BUCKET_NAME: arcxpplogs
+      Policies:
+        - Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - logs:CreateLogGroup
+                - logs:CreateLogStream
+                - logs:PutLogEvents
+                - logs:DescribeLogStreams
+              Resource: arn:aws:logs:us-east-1:*:log-group:ArcXP/DynamicLogStreams*
+        - Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - s3:PutObject
+              Resource: arn:aws:s3:::arcxpplogs/*
+        - Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - kinesis:DescribeStream
+                - kinesis:GetShardIterator
+                - kinesis:GetRecords
+              Resource: arn:aws:kinesis:us-east-1:<aws-account-id>:stream/ArcXPDestinationLogStream
+      Events:
+        KinesisTrigger:
+          Type: Kinesis
+          Properties:
+            Stream: arn:aws:kinesis:us-east-1:<aws-account-id>:stream/ArcXPDestinationLogStream
+            StartingPosition: LATEST
+            BatchSize: 100
+
