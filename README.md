@@ -4,9 +4,7 @@
 
 This guide outlines the step-by-step process for configuring an Arc XP client’s AWS account to receive logs from Arc XP's Fusion rendering engine.
 
-While Arc XP personnel will handle the **CloudWatch Logs subscription filter** configuration within the client’s Arc XP environment, this document focuses solely on the actions the customer must take to prepare their AWS environment for receiving and managing logs.
-
-The guide includes detailed instructions on:
+It includes detailed instructions on:
 
 - Setting up a **Kinesis Data Stream**
 - Creating the necessary **IAM roles and policies**
