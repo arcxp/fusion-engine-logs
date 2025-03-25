@@ -39,12 +39,12 @@ Resources:
                 - kinesis:DescribeStream
                 - kinesis:GetShardIterator
                 - kinesis:GetRecords
-              Resource: arn:aws:kinesis:us-east-1:<aws-account-id>:stream/ArcXPDestinationLogStream
+              Resource: arn:aws:kinesis:<region>:<aws-account-id>:stream/ArcXPDestinationLogStream
       Events:
         KinesisTrigger:
           Type: Kinesis
           Properties:
-            Stream: arn:aws:kinesis:us-east-1:<aws-account-id>:stream/ArcXPDestinationLogStream
+            Stream: arn:aws:kinesis:<region>:<aws-account-id>:stream/ArcXPDestinationLogStream
             StartingPosition: LATEST
             BatchSize: 100
 
