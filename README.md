@@ -20,6 +20,7 @@ Additionally, the solution includes an optional **AWS Lambda function** that ena
 Before you begin, ensure you have the following:
 - An AWS account with necessary permissions.
 - AWS CLI installed and configured.
+- `<sourceAccountId>` provided by Arc, representing Arc's source account ID.
 
 ## Step-by-Step Setup
 
@@ -113,7 +114,7 @@ cat > access-policy.json << EOL
   "Statement": [
     {
       "Effect": "Allow",
-      "Principal": {"AWS": "<sourceAccountId>"},
+      "Principal": {"AWS": "<sourceAccountId>"},  # Provided by Arc, representing Arc's source account ID
       "Action": "logs:PutSubscriptionFilter",
       "Resource": "arn:aws:logs:<region>:<destinationAccountId>:destination:ArcXPLogDestination"
     }
@@ -166,7 +167,13 @@ After deployment, verify that the Lambda function is created and configured corr
 <img width="1395" alt="image" src="https://github.com/user-attachments/assets/5fdbf448-f51d-4c73-a2c7-31e749dafedf" />
 
 
-## Troubleshooting
+## Next Steps
+
+Now that you have set up the log forwarding, you may want to understand what's in the engine logs. You can refer to the [Arc XP documentation on how to read engine logs](https://docs.arcxp.com/en/products/pagebuilder-engine/how-to-read-engine-logs.html) for more information.
+
+Additionally, you can explore some CloudWatch example queries that might be useful now that you have the engine logs in your AWS account.
+
 ### Common Issues and Fixes
+
 - **Logs not appearing in CloudWatch**: Verify IAM role permissions, Kinesis stream configuration, and subscription filters.
 - **Access Denied Errors**: Check the CloudWatch destination policy and IAM role permissions.
