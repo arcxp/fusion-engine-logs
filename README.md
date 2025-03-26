@@ -1,8 +1,6 @@
-# Arc XP Log Forwarding to AWS CloudWatch & s3
 
-## Overview
-
-This guide outlines the step-by-step process for configuring an Arc XP client’s AWS account to receive logs from Arc XP's Fusion rendering engine.
+# How to Configure Fusion Engine Logs Forwarding
+In any software application of sufficient size and complexity, you'll have to deal with log management and forwarding. This guide outlines the step-by-step process for configuring an Arc XP client’s AWS account to receive logs from Arc XP's Fusion rendering engine.
 
 It includes detailed instructions on:
 
@@ -11,18 +9,21 @@ It includes detailed instructions on:
 - Configuring the **CloudWatch Logs destination**
 - Deploying resources using the **AWS CLI**
 
-
 Additionally, the solution includes an optional **AWS Lambda function** that enables streaming of logs content to **CloudWatch Logs** and/or **Amazon S3** within the customer’s receiving account.
 
-*Note:* The aws region for the destination account must match the Arc XP Platform deployment region 
+*Note:* The AWS region for the destination account must match the Arc XP Platform deployment region.
 
 ## Prerequisites
+
 Before you begin, ensure you have the following:
+
 - An AWS account with necessary permissions.
 - AWS CLI installed and configured.
 - `<sourceAccountId>` provided by Arc, representing Arc's source account ID.
 
 ## Step-by-Step Setup
+
+In this section, we will walk through the process of setting up log forwarding from Arc XP's Fusion rendering engine to AWS CloudWatch and S3.
 
 ### 1. Create a Kinesis Data Stream
 Kinesis Data Stream will act as the intermediary where logs are forwarded before being processed. Creating a Kinesis stream ensures that log data is handled efficiently and can be accessed by CloudWatch.
@@ -134,6 +135,15 @@ aws logs put-destination-policy \
 
 ## Deploying the AWS Lambda Function with AWS SAM
 
+### Summary of the Lambda Function
+
+The AWS Lambda function is designed to process log records from a Kinesis stream. It performs the following tasks:
+
+- Decodes and decompresses log data received from Kinesis.
+- Parses the log data and forwards it to CloudWatch Logs.
+- Buffers log messages and uploads them to an S3 bucket when the buffer reaches a specified size.
+- Ensures that the necessary CloudWatch log groups and streams are created and maintained.
+
 ### Important: Replace Placeholders in `template.yaml`
 Before deploying the Lambda function, ensure that all placeholders in the `template.yaml` file are replaced with your specific AWS account details. The placeholders include:
 
@@ -175,5 +185,5 @@ Additionally, you can explore some CloudWatch example queries that might be usef
 
 ### Common Issues and Fixes
 
-- **Logs not appearing in CloudWatch**: Verify IAM role permissions, Kinesis stream configuration, and subscription filters.
+- **Logs not appearing in CloudWatch**: Verify IAM role permissions, Kinesis stream configuration, and the Lambda function logs
 - **Access Denied Errors**: Check the CloudWatch destination policy and IAM role permissions.
