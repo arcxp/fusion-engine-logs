@@ -11,7 +11,7 @@ logs_client = boto3.client("logs")
 s3_client = boto3.client("s3")
 
 # Configuration variables loaded from environment variables
-s3_bucket_name = os.getenv("S3_BUCKET_NAME", "arcxpplogs")  # S3 bucket name
+s3_bucket_name = os.getenv("S3_BUCKET_NAME", "arcxpplogs-<MyOrganizationName>")  # S3 bucket name where the logs will be stored
 log_group_name = "ArcXP/DynamicLogStreams"  # CloudWatch Logs group name
 stream_tokens = {}  # Dictionary to store sequence tokens for log streams
 max_log_buffer_size = 100  # Maximum number of log messages to buffer before uploading to S3
