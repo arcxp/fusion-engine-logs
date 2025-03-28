@@ -151,12 +151,12 @@ The AWS Lambda function is designed to process log records from a Kinesis stream
 - Buffers log messages and uploads them to an S3 bucket when the buffer reaches a specified size.
 - Ensures that the necessary CloudWatch log groups and streams are created and maintained.
 
-### Important: Replace Placeholders in `template.yaml` & `the log_forwarder.py`
+### Important: Replace Placeholders in `template.yaml`
 Before deploying the Lambda function, ensure that all placeholders in the `template.yaml` file are replaced with your specific AWS account details. The placeholders include:
 
 - `<aws-account-id>`: Replace with your AWS account ID.
 - `<region>`: Replace with the AWS region where you want to deploy the resources.
-- `<arcxpplogs-<MyOrganizationName>`: Replace with your own bucket name, ensure it's already exists prior running the lambda
+- `S3_BUCKET_NAME`: Set with your own bucket name, ensure it's already exists prior running the lambda
 
 
 Ensure these placeholders are correctly replaced to avoid deployment errors.

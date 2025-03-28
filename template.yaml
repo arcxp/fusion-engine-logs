@@ -15,7 +15,7 @@ Resources:
       Timeout: 60
       Environment:
         Variables:
-          S3_BUCKET_NAME: arcxpplogs
+          S3_BUCKET_NAME: arcxpplogs-<MyOrganizationName>
       Policies:
         - Version: "2012-10-17"
           Statement:
